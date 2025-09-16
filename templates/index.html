@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Swashtya Margadarshika - Medical Health Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/transitions.css">
+    <link rel="stylesheet" href="../static/read-aloud.css">
+    <link rel="stylesheet" href="../static/modal-styles.css">
+    <link rel="stylesheet" href="../static/auth.css">
+    <link rel="stylesheet" href="../static/symptom-images.css">
+  </head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <!-- Logo at the top-left corner -->
+            <div class="logo">
+                <img src="../static/xyz.png" alt="Medical Logo">
+            </div>
+
+            <a class="navbar-brand" href="#">Swashtya Margadarshika</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/developer">Developer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    {% if user_name %}
+                    <div class="dropdown me-3">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-1"></i> {{ user_name }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                    {% else %}
+                    <a href="/login" class="btn btn-outline-light me-2">Login</a>
+                    <a href="/register" class="btn btn-primary">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+<!-- Flash messages - Only shown when there are messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show auto-dismiss-alert" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- main form of page -->
+<h1 class="mt-4 mb-5 text-center fade-in" style="color: #2c3e50; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">Swashtya Margadarshika</h1>
+<div class="container my-4 slide-in" style="max-width: 800px; background-color: #f8f9fa; border-radius: 15px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <form action="/predict" method="post">
+        <div class="form-group mb-4">
+            <label for="symptoms" class="form-label fw-bold mb-2">Select Symptoms:</label>
+            <input type="text" class="form-control" style="width: 100%; background: linear-gradient(45deg, rgba(168, 161, 161, 0.2), rgba(255, 255, 255, 0.8));
+            border-radius: 1.5rem; padding: 12px 20px; border: 1px solid #ced4da; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);"
+            id="symptoms" name="symptoms" placeholder="Type symptoms such as itching, sleeping, aching etc">
+
+
+{#    <!-- Input area -->#}
+{#    <label for="Speech Recognition">Speech Recognition</label>#}
+{#    <input type="text" name="" id="speechToText" placeholder="Speak Something" onclick="record()">#}
+{##}
+{#    <!-- Below is the script for voice recognition and conversion to text-->#}
+{#    <script>#}
+{#        function record() {#}
+{#            var recognition = new webkitSpeechRecognition();#}
+{#            recognition.lang = "en-GB";#}
+{##}
+{#            recognition.onresult = function(event) {#}
+{#                // console.log(event);#}
+{#                document.getElementById('speechToText').value = event.results[0][0].transcript;#}
+{#            }#}
+{#            recognition.start();#}
+{##}
+{#        }#}
+{#    </script>#}
+
+
+        </div>
+
+        <div class="d-flex align-items-center mb-4">
+            <button type="button" id="startSpeechRecognition" class="btn btn-info"
+                   style="margin-left:3px; border:none; border-radius:30px; padding: 10px 20px;
+                   background: linear-gradient(45deg, #17a2b8, #20c997); color: white;
+                   box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                <i class="fas fa-microphone me-2"></i> Start Speech Recognition
+            </button>
+            <button type="button" class="btn btn-link text-info ms-2" data-bs-toggle="tooltip" data-bs-placement="right"
+                   title="Click this button and speak your symptoms clearly. Your speech will be converted to text and entered in the symptoms field."
+                   style="font-size: 1.2rem;">
+                <i class="fas fa-question-circle"></i>
+            </button>
+        </div>
+
+        <!-- Display the transcribed text here -->
+        <div name="mysysms" id="transcription" class="alert alert-light mb-3" style="display: none; border-radius: 10px; border: 1px solid #e0e0e0;"></div>
+
+        {% if message %}
+        <p class="alert alert-info">{{ message }}</p>
+        {% endif %}
+
+        <button type="submit" id="predictButton" class="btn btn-lg w-100"
+               style="background: linear-gradient(45deg, #2980b9, #3498db); color: white;
+               padding: 12px; border-radius: 30px; border: none; font-weight: 600;
+               letter-spacing: 0.5px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+               transition: all 0.3s ease; margin-bottom: 10px;">Predict</button>
+    </form>
+
+    <!-- Loading indicator (hidden by default) -->
+    <div id="loadingIndicator" class="text-center mt-3 p-4" style="display: none; background-color: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-3 mb-0" style="color: #2c3e50; font-weight: 500; font-size: 1.1rem;">
+            <i class="fas fa-stethoscope me-2"></i> Analyzing symptoms, please wait...
+        </p>
+        <p class="text-muted small mt-2">Our AI is processing your symptoms to provide accurate results</p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{% if predicted_disease %}
+
+<!-- Results -->
+<h1 class="text-center my-4 mt-4" style="font-weight: bold; color:#ff0000; text-shadow:2px 2px 1px rgb(213 160 160);">Our AI System Results</h1>
+
+{% if ai_generated %}
+<div class="container">
+    <div class="alert alert-info" role="alert" style="background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; border-radius: 10px; padding: 15px;">
+        <strong>Note:</strong> These results are generated by AI based on your symptoms that didn't match our medical database. Please consult with a healthcare professional for accurate diagnosis.
+    </div>
+</div>
+{% endif %}
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="alert alert-success" role="alert" style="background-color: #e8f5e8; color: #155724; border-color: #c3e6cb; border-radius: 10px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <i class="fas fa-info-circle me-2"></i> <strong>Click on any category below to view details.</strong> The content will be automatically read aloud when you open each section.
+            </div>
+        </div>
+    </div>
+
+    <div class="result-container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 mb-3">
+                <button class="toggle-button w-100" data-bs-toggle="modal" data-bs-target="#diseaseModal"
+                       style="padding:12px; font-size:18px; border-radius:15px;
+                       background: linear-gradient(135deg, #56ceff, #4a9bd1);
+                       color:white; border: none; font-weight: 600;
+                       box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+                    <i class="fas fa-disease me-2"></i> Disease
+                </button>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-3">
+                <button class="toggle-button w-100" data-bs-toggle="modal" data-bs-target="#descriptionModal"
+                       style="padding:12px; font-size:18px; border-radius:15px;
+                       background: linear-gradient(135deg, #56ceff, #4a9bd1);
+                       color:white; border: none; font-weight: 600;
+                       box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+                    <i class="fas fa-info-circle me-2"></i> Description
+                </button>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-3">
+                <button class="toggle-button w-100" data-bs-toggle="modal" data-bs-target="#precautionModal"
+                       style="padding:12px; font-size:18px; border-radius:15px;
+                       background: linear-gradient(135deg, #56ceff, #4a9bd1);
+                       color:white; border: none; font-weight: 600;
+                       box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+                    <i class="fas fa-shield-alt me-2"></i> Precaution
+                </button>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-3">
+                <button class="toggle-button w-100" data-bs-toggle="modal" data-bs-target="#medicationsModal"
+                       style="padding:12px; font-size:18px; border-radius:15px;
+                       background: linear-gradient(135deg, #56ceff, #4a9bd1);
+                       color:white; border: none; font-weight: 600;
+                       box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+                    <i class="fas fa-pills me-2"></i> Medications
+                </button>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-3">
+                <button class="toggle-button w-100" data-bs-toggle="modal" data-bs-target="#workoutsModal"
+                       style="padding:12px; font-size:18px; border-radius:15px;
+                       background: linear-gradient(135deg, #56ceff, #4a9bd1);
+                       color:white; border: none; font-weight: 600;
+                       box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+                    <i class="fas fa-running me-2"></i> Workouts
+                </button>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-3">
+                <button class="toggle-button w-100" data-bs-toggle="modal" data-bs-target="#dietsModal"
+                       style="padding:12px; font-size:18px; border-radius:15px;
+                       background: linear-gradient(135deg, #56ceff, #4a9bd1);
+                       color:white; border: none; font-weight: 600;
+                       box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+                    <i class="fas fa-apple-alt me-2"></i> Diets
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Card -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card" style="border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div class="card-header" style="background: linear-gradient(135deg, #4a9bd1, #3498db); color: white; border: none; padding: 15px;">
+                    <h5 class="mb-0"><i class="fas fa-clipboard-list me-2"></i> Summary</h5>
+                </div>
+                <div class="card-body" style="padding: 20px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;"><i class="fas fa-disease me-2"></i> <strong>Disease:</strong></h6>
+                            <p class="mb-4" style="background-color: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #4a9bd1;">{{ predicted_disease }}</p>
+
+                            <h6 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;"><i class="fas fa-info-circle me-2"></i> <strong>Description:</strong></h6>
+                            <p style="background-color: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #4a9bd1;">{{ dis_des|truncate(150) }}
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#descriptionModal" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                                    Read more <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;"><i class="fas fa-shield-alt me-2"></i> <strong>Key Precautions:</strong></h6>
+                            <ul class="list-group" style="border-radius: 8px; overflow: hidden;">
+                                {% for i in my_precautions[:2] %}
+                                    <li class="list-group-item" style="border-left: 4px solid #4a9bd1; background-color: #f8f9fa;">
+                                        <i class="fas fa-check-circle me-2" style="color: #20c997;"></i> {{ i }}
+                                    </li>
+                                {% endfor %}
+                                {% if my_precautions|length > 2 %}
+                                    <li class="list-group-item" style="border-left: 4px solid #4a9bd1; background-color: #f8f9fa;">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#precautionModal" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                                            <i class="fas fa-plus-circle me-2"></i> More precautions...
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+<!-- Disease Modal -->
+<div class="modal fade" id="diseaseModal" tabindex="-1" aria-labelledby="diseaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4a9bd1; color:white;">
+                <h5 class="modal-title" id="diseaseModalLabel"><i class="fas fa-disease"></i> Predicted Disease</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="p-2 rounded mb-3" style="background-color: #f8f9fa;">
+                    {% if predicted_disease is defined and predicted_disease and predicted_disease|string|trim %}
+                    <p class="mb-0"><strong>{{ predicted_disease }}</strong></p>
+                    {% else %}
+                    <p class="mb-0">No disease prediction available. Please enter your symptoms and click "Predict".</p>
+                    {% endif %}
+                </div>
+                <!-- Text-to-speech button will be added here by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- Read Aloud button removed as audio plays automatically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Description Modal -->
+<div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4a9bd1; color:white;">
+                <h5 class="modal-title" id="descriptionModalLabel"><i class="fas fa-info-circle"></i> Description</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="p-3 rounded mb-3" style="background-color: #f8f9fa;">
+                    {% if dis_des is defined and dis_des and dis_des|string|trim %}
+                    <p>{{ dis_des }}</p>
+                    {% else %}
+                    <p>No description available. Please enter your symptoms and click "Predict" to get a description.</p>
+                    {% endif %}
+                </div>
+                <!-- Text-to-speech button will be added here by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- Read Aloud button removed as audio plays automatically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Precaution Modal -->
+<div class="modal fade" id="precautionModal" tabindex="-1" aria-labelledby="precautionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4a9bd1; color:white;">
+                <h5 class="modal-title" id="precautionModalLabel"><i class="fas fa-shield-alt"></i> Precautions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="p-3 rounded mb-3" style="background-color: #f8f9fa;">
+                    {% if my_precautions is defined and my_precautions|length > 0 %}
+                    <ul class="list-group list-group-flush">
+                        {% for i in my_precautions %}
+                            {% if i is defined and i|string|trim %}
+                            <li class="list-group-item">{{ i }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No precautions available. Please enter your symptoms and click "Predict" to get precautions.</p>
+                    {% endif %}
+                </div>
+                <!-- Text-to-speech button will be added here by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- Read Aloud button removed as audio plays automatically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Medications Modal -->
+<div class="modal fade" id="medicationsModal" tabindex="-1" aria-labelledby="medicationsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4a9bd1; color:white;">
+                <h5 class="modal-title" id="medicationsModalLabel"><i class="fas fa-pills"></i> Medications</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i> Always consult with a healthcare professional before taking any medication.
+                </div>
+                <div class="p-3 rounded mb-3" style="background-color: #f8f9fa;">
+                    {% if medications is defined and medications|length > 0 %}
+                    <ul class="list-group list-group-flush">
+                        {% for i in medications %}
+                            {% if i is defined and i|string|trim %}
+                            <li class="list-group-item">{{ i }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No medications available. Please enter your symptoms and click "Predict" to get medication recommendations.</p>
+                    {% endif %}
+                </div>
+                <!-- Text-to-speech button will be added here by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- Read Aloud button removed as audio plays automatically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Workouts Modal -->
+<div class="modal fade" id="workoutsModal" tabindex="-1" aria-labelledby="workoutsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4a9bd1; color:white;">
+                <h5 class="modal-title" id="workoutsModalLabel"><i class="fas fa-running"></i> Recommended Workouts</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="p-3 rounded mb-3" style="background-color: #f8f9fa;">
+                    {% if workout is defined and workout|length > 0 %}
+                    <ul class="list-group list-group-flush">
+                        {% for i in workout %}
+                            {% if i is defined and i|string|trim %}
+                            <li class="list-group-item">{{ i }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No workout recommendations available. Please enter your symptoms and click "Predict" to get workout recommendations.</p>
+                    {% endif %}
+                </div>
+                <!-- Text-to-speech button will be added here by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- Read Aloud button removed as audio plays automatically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diets Modal -->
+<div class="modal fade" id="dietsModal" tabindex="-1" aria-labelledby="dietsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4a9bd1; color:white;">
+                <h5 class="modal-title" id="dietsModalLabel"><i class="fas fa-apple-alt"></i> Recommended Diet</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="p-3 rounded mb-3" style="background-color: #f8f9fa;">
+                    {% if my_diet is defined and my_diet|length > 0 %}
+                    <ul class="list-group list-group-flush">
+                        {% for i in my_diet %}
+                            {% if i is defined and i|string|trim %}
+                            <li class="list-group-item">{{ i }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No diet recommendations available. Please enter your symptoms and click "Predict" to get diet recommendations.</p>
+                    {% endif %}
+                </div>
+                <!-- Text-to-speech button will be added here by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- Read Aloud button removed as audio plays automatically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+        <!-- Include auth.js for authentication functionality -->
+        <script src="../static/auth.js"></script>
+
+        <script>
+    // Speech recognition functionality
+    const startSpeechRecognitionButton = document.getElementById('startSpeechRecognition');
+    const transcriptionDiv = document.getElementById('transcription');
+
+    if (startSpeechRecognitionButton) {
+        startSpeechRecognitionButton.addEventListener('click', startSpeechRecognition);
+    }
+
+    function startSpeechRecognition() {
+        // Show a loading indicator on the button
+        if (startSpeechRecognitionButton) {
+            startSpeechRecognitionButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Listening...';
+            startSpeechRecognitionButton.disabled = true;
+            startSpeechRecognitionButton.style.background = 'linear-gradient(45deg, #6c757d, #495057)';
+        }
+
+        const recognition = new webkitSpeechRecognition(); // Use webkitSpeechRecognition for compatibility
+        const symptomsInput = document.getElementById('symptoms');
+
+        recognition.lang = 'en-US'; // Set the language for recognition
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onresult = function (event) {
+            const result = event.results[0][0].transcript;
+
+            // Show the transcription div and update its content
+            if (transcriptionDiv) {
+                transcriptionDiv.style.display = 'block';
+                transcriptionDiv.innerHTML = '<strong>Recognized:</strong> ' + result;
+                transcriptionDiv.classList.add('animate__animated', 'animate__fadeIn');
+            }
+
+            // Update the symptoms input field with the transcribed text
+            if (symptomsInput) {
+                symptomsInput.value = result;
+                // Add a subtle highlight effect to the input
+                symptomsInput.style.boxShadow = '0 0 8px rgba(52, 152, 219, 0.5)';
+                setTimeout(() => {
+                    symptomsInput.style.boxShadow = 'inset 0 1px 3px rgba(0,0,0,0.1)';
+                }, 1000);
+            }
+        };
+
+        recognition.onend = function () {
+            console.log('Speech recognition ended.');
+            // Reset the button
+            if (startSpeechRecognitionButton) {
+                startSpeechRecognitionButton.innerHTML = '<i class="fas fa-microphone me-2"></i> Start Speech Recognition';
+                startSpeechRecognitionButton.disabled = false;
+                startSpeechRecognitionButton.style.background = 'linear-gradient(45deg, #17a2b8, #20c997)';
+            }
+        };
+
+        recognition.onerror = function(event) {
+            console.error('Speech recognition error:', event.error);
+            // Show error in transcription div
+            if (transcriptionDiv) {
+                transcriptionDiv.style.display = 'block';
+                transcriptionDiv.innerHTML = '<strong>Error:</strong> ' + event.error + '. Please try again.';
+                transcriptionDiv.className = 'alert alert-danger mb-3';
+            }
+
+            // Reset the button
+            if (startSpeechRecognitionButton) {
+                startSpeechRecognitionButton.innerHTML = '<i class="fas fa-microphone me-2"></i> Start Speech Recognition';
+                startSpeechRecognitionButton.disabled = false;
+                startSpeechRecognitionButton.style.background = 'linear-gradient(45deg, #17a2b8, #20c997)';
+            }
+        };
+
+        recognition.start();
+    }
+
+    // Form submission and loading indicator
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form[action="/predict"]');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const predictButton = document.getElementById('predictButton');
+
+        if (form && loadingIndicator && predictButton) {
+            form.addEventListener('submit', function() {
+                // Check if symptoms field has content
+                const symptomsInput = document.getElementById('symptoms');
+                if (symptomsInput && symptomsInput.value.trim() !== '') {
+                    // Show loading indicator
+                    loadingIndicator.style.display = 'block';
+                    // Disable the predict button to prevent multiple submissions
+                    predictButton.disabled = true;
+                    predictButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+                }
+            });
+        }
+
+        // Initialize tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        // Initialize modals
+        const modalEls = document.querySelectorAll('.modal');
+        modalEls.forEach(modalEl => {
+            // Create a new Bootstrap modal instance
+            const modal = new bootstrap.Modal(modalEl);
+
+            // Add event listener for when modal is shown
+            modalEl.addEventListener('shown.bs.modal', function() {
+                console.log(`Modal ${modalEl.id} shown`);
+
+                // Make sure content is visible
+                const modalBody = modalEl.querySelector('.modal-body');
+                if (modalBody) {
+                    modalBody.style.display = 'block';
+
+                    // Make sure all content divs are visible
+                    const contentDivs = modalBody.querySelectorAll('div');
+                    contentDivs.forEach(div => {
+                        div.style.display = 'block';
+                    });
+                }
+            });
+        });
+
+        // Add click event listeners to modal toggle buttons
+        const modalButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+        modalButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetModalId = this.getAttribute('data-bs-target');
+                console.log(`Button clicked for modal: ${targetModalId}`);
+            });
+        });
+    });
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="../static/lightweight-animations.js"></script>
+    <script src="../static/text-to-speech.js"></script>
+    <script src="../static/user-preferences.js"></script>
+    <script src="../static/disease-prediction.js"></script>
+    <!-- Removed read-aloud.js to avoid conflicts with text-to-speech.js -->
+    <script src="../static/recent-searches.js"></script>
+    <script src="../static/modal-handler.js"></script>
+    <script src="../static/modal-fix.js"></script>
+    <script src="../static/symptom-images.js"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+<script src="https://mediafiles.botpress.cloud/e70308e7-6dd0-4ff4-94d3-25f3fd9bd397/webchat/config.js" defer></script>
+
+</body>
+
+</html>

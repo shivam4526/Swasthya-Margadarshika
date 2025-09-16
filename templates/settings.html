@@ -1,0 +1,327 @@
+{% extends 'base.html' %}
+
+{% block title %}Settings - Swashtya Margadarshika{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div class="card-header" style="background: linear-gradient(135deg, #4a9bd1, #3498db); color: white; border: none; padding: 15px;">
+                    <h5 class="mb-0"><i class="fas fa-cog me-2"></i> Settings</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush" id="settings-tabs" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="general-tab" data-bs-toggle="list" href="#general" role="tab" aria-controls="general">
+                            <i class="fas fa-sliders-h me-2"></i> General
+                        </a>
+                        <a class="list-group-item list-group-item-action" id="appearance-tab" data-bs-toggle="list" href="#appearance" role="tab" aria-controls="appearance">
+                            <i class="fas fa-palette me-2"></i> Appearance
+                        </a>
+                        <a class="list-group-item list-group-item-action" id="notifications-tab" data-bs-toggle="list" href="#notifications" role="tab" aria-controls="notifications">
+                            <i class="fas fa-bell me-2"></i> Notifications
+                        </a>
+                        <a class="list-group-item list-group-item-action" id="privacy-tab" data-bs-toggle="list" href="#privacy" role="tab" aria-controls="privacy">
+                            <i class="fas fa-user-shield me-2"></i> Privacy
+                        </a>
+                        <a class="list-group-item list-group-item-action" id="accessibility-tab" data-bs-toggle="list" href="#accessibility" role="tab" aria-controls="accessibility">
+                            <i class="fas fa-universal-access me-2"></i> Accessibility
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <div class="card" style="border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div class="tab-content p-4">
+                    <!-- General Settings -->
+                    <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+                        <h4 class="mb-4">General Settings</h4>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Language</h5>
+                            <select class="form-select" id="language-select">
+                                <option value="en" selected>English</option>
+                                <option value="hi">Hindi</option>
+                                <option value="bn">Bengali</option>
+                                <option value="te">Telugu</option>
+                                <option value="mr">Marathi</option>
+                                <option value="ta">Tamil</option>
+                                <option value="ur">Urdu</option>
+                                <option value="gu">Gujarati</option>
+                                <option value="kn">Kannada</option>
+                                <option value="ml">Malayalam</option>
+                            </select>
+                            <div class="form-text">Choose your preferred language for the application interface.</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Search History</h5>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="save-search-history" checked>
+                                <label class="form-check-label" for="save-search-history">Save search history</label>
+                            </div>
+                            <div class="form-text mb-3">Your recent searches will be saved for quick access.</div>
+                            <button class="btn btn-outline-danger" id="clear-all-history">
+                                <i class="fas fa-trash-alt me-2"></i> Clear All Search History
+                            </button>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Auto-dismiss Notifications</h5>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="auto-dismiss-notifications" checked>
+                                <label class="form-check-label" for="auto-dismiss-notifications">Auto-dismiss notifications after 3 seconds</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Appearance Settings -->
+                    <div class="tab-pane fade" id="appearance" role="tabpanel" aria-labelledby="appearance-tab">
+                        <h4 class="mb-4">Appearance Settings</h4>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Theme</h5>
+                            <div class="d-flex gap-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="theme" id="light-theme" checked>
+                                    <label class="form-check-label" for="light-theme">
+                                        Light
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="theme" id="dark-theme">
+                                    <label class="form-check-label" for="dark-theme">
+                                        Dark
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="theme" id="system-theme">
+                                    <label class="form-check-label" for="system-theme">
+                                        System Default
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Font Size</h5>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2"><i class="fas fa-font fa-sm"></i></span>
+                                <input type="range" class="form-range" min="1" max="5" step="1" id="font-size-range" value="3">
+                                <span class="ms-2"><i class="fas fa-font fa-lg"></i></span>
+                            </div>
+                            <div class="form-text">Adjust the font size for better readability.</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Color Scheme</h5>
+                            <div class="d-flex gap-2 mb-3">
+                                <button class="btn btn-primary rounded-circle p-3" style="background-color: #3498db; border: none;"></button>
+                                <button class="btn btn-primary rounded-circle p-3" style="background-color: #2ecc71; border: none;"></button>
+                                <button class="btn btn-primary rounded-circle p-3" style="background-color: #e74c3c; border: none;"></button>
+                                <button class="btn btn-primary rounded-circle p-3" style="background-color: #f39c12; border: none;"></button>
+                                <button class="btn btn-primary rounded-circle p-3" style="background-color: #9b59b6; border: none;"></button>
+                            </div>
+                            <div class="form-text">Choose your preferred color scheme for the application.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notifications Settings -->
+                    <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+                        <h4 class="mb-4">Notification Settings</h4>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Email Notifications</h5>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="email-notifications" checked>
+                                <label class="form-check-label" for="email-notifications">Receive email notifications</label>
+                            </div>
+                            <div class="form-text">You will receive emails about important updates and health tips.</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Notification Types</h5>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="health-tips-notifications" checked>
+                                <label class="form-check-label" for="health-tips-notifications">Health Tips</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="reminder-notifications" checked>
+                                <label class="form-check-label" for="reminder-notifications">Medication Reminders</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="system-notifications" checked>
+                                <label class="form-check-label" for="system-notifications">System Updates</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Privacy Settings -->
+                    <div class="tab-pane fade" id="privacy" role="tabpanel" aria-labelledby="privacy-tab">
+                        <h4 class="mb-4">Privacy Settings</h4>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Data Sharing</h5>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="data-sharing">
+                                <label class="form-check-label" for="data-sharing">Share anonymous data for research</label>
+                            </div>
+                            <div class="form-text mb-3">Your anonymous health data can help improve medical research.</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Account Privacy</h5>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="profile-visibility" checked>
+                                <label class="form-check-label" for="profile-visibility">Make profile visible to others</label>
+                            </div>
+                            <div class="form-text mb-3">Control who can see your profile information.</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Data Management</h5>
+                            <button class="btn btn-outline-primary mb-2">
+                                <i class="fas fa-download me-2"></i> Download My Data
+                            </button>
+                            <button class="btn btn-outline-danger">
+                                <i class="fas fa-trash-alt me-2"></i> Delete My Account
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Accessibility Settings -->
+                    <div class="tab-pane fade" id="accessibility" role="tabpanel" aria-labelledby="accessibility-tab">
+                        <h4 class="mb-4">Accessibility Settings</h4>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Text-to-Speech</h5>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="auto-tts" checked>
+                                <label class="form-check-label" for="auto-tts">Automatically read content aloud when opening modals</label>
+                            </div>
+                            <div class="form-text mb-3">Content will be read aloud automatically when you open disease information, descriptions, etc.</div>
+                            
+                            <div class="mb-3">
+                                <label for="tts-voice" class="form-label">Voice</label>
+                                <select class="form-select" id="tts-voice">
+                                    <option value="female" selected>Female</option>
+                                    <option value="male">Male</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="tts-speed" class="form-label">Speech Rate</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="me-2">Slow</span>
+                                    <input type="range" class="form-range" min="0.5" max="2" step="0.1" id="tts-speed" value="1">
+                                    <span class="ms-2">Fast</span>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary" id="test-tts">
+                                <i class="fas fa-volume-up me-2"></i> Test Speech
+                            </button>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Visual Accessibility</h5>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="high-contrast">
+                                <label class="form-check-label" for="high-contrast">High Contrast Mode</label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="reduce-motion">
+                                <label class="form-check-label" for="reduce-motion">Reduce Motion</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-footer bg-light d-flex justify-content-end" style="border-top: 1px solid rgba(0,0,0,0.1); padding: 15px;">
+                    <button type="button" class="btn btn-secondary me-2">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="save-settings" style="background: linear-gradient(135deg, #4a9bd1, #3498db); border: none;">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Save settings button
+        const saveSettingsBtn = document.getElementById('save-settings');
+        if (saveSettingsBtn) {
+            saveSettingsBtn.addEventListener('click', function() {
+                // Show success message
+                const toast = document.createElement('div');
+                toast.className = 'position-fixed bottom-0 end-0 p-3';
+                toast.style.zIndex = '11';
+                toast.innerHTML = `
+                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header" style="background: linear-gradient(135deg, #4a9bd1, #3498db); color: white;">
+                            <strong class="me-auto">Settings Saved</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            Your settings have been saved successfully!
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(toast);
+                
+                // Auto-dismiss after 3 seconds
+                setTimeout(() => {
+                    const toastEl = document.querySelector('.toast');
+                    if (toastEl) {
+                        const bsToast = new bootstrap.Toast(toastEl);
+                        bsToast.hide();
+                    }
+                }, 3000);
+            });
+        }
+        
+        // Test TTS button
+        const testTtsBtn = document.getElementById('test-tts');
+        if (testTtsBtn) {
+            testTtsBtn.addEventListener('click', function() {
+                const testMessage = "This is a test of the text-to-speech feature. You can adjust the voice and speed in the settings.";
+                
+                // Check if the browser supports speech synthesis
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance(testMessage);
+                    
+                    // Set voice based on selection
+                    const voiceSelect = document.getElementById('tts-voice');
+                    const voices = window.speechSynthesis.getVoices();
+                    
+                    if (voices.length > 0) {
+                        // Try to find a female or male voice based on selection
+                        const preferredGender = voiceSelect.value;
+                        let selectedVoice = voices.find(voice => 
+                            preferredGender === 'female' ? voice.name.includes('Female') : voice.name.includes('Male')
+                        );
+                        
+                        // If no gender-specific voice found, use the first available
+                        if (!selectedVoice) {
+                            selectedVoice = voices[0];
+                        }
+                        
+                        utterance.voice = selectedVoice;
+                    }
+                    
+                    // Set rate based on slider
+                    const rateSlider = document.getElementById('tts-speed');
+                    utterance.rate = parseFloat(rateSlider.value);
+                    
+                    // Speak the message
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    alert("Sorry, your browser does not support text-to-speech!");
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

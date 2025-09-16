@@ -1,0 +1,155 @@
+/* modal-styles.css - Styles for modal display */
+
+/* Modal styles */
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 15px 20px;
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 15px 20px;
+}
+
+/* List group styles */
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 12px 15px;
+    transition: background-color 0.2s ease;
+}
+
+.list-group-item:first-child {
+    border-top: none;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Content container styles */
+.p-2, .p-3 {
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Empty content message */
+.empty-content-message {
+    color: #6c757d;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal animation */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translateY(-50px);
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0);
+}
+
+/* Modal button styles */
+.modal-footer .btn {
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.modal-footer .btn-primary {
+    background-color: #4a9bd1;
+    border-color: #4a9bd1;
+}
+
+/* Alert styles */
+.alert {
+    border-radius: 5px;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffecb5;
+    color: #856404;
+}
+
+/* Make sure content is visible */
+.modal-body > div {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.list-group {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.list-group-item {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Special styling for disease modal */
+#diseaseModal .modal-body p {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+#diseaseModal .modal-body p strong {
+    font-weight: 600;
+    color: #4a9bd1;
+}
+
+/* Special styling for description modal */
+#descriptionModal .modal-body p {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    line-height: 1.6;
+}
+
+/* Empty content message styling */
+.empty-content-message {
+    color: #6c757d;
+    font-style: italic;
+    text-align: center;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin: 10px 0;
+}
