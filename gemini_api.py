@@ -5,7 +5,8 @@ import re
 
 # You should set this as an environment variable for security
 # For now, we'll keep it in the code for simplicity
-API_KEY = "AIzaSyBHHvO9y3xX_0YOMc3z21Z1XVIxyfoUzIs"
+#insert your own gemini api
+API_KEY = ""
 API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
 
 # Play.ht API key for text-to-speech
