@@ -286,7 +286,8 @@ def generate_image_with_gemini(symptom, description):
     Returns:
         str: Base64 encoded image data or None if generation fails
     """
-    API_KEY = "AIzaSyBDqsAreOY179gQsTF-qJBfLC9osvcTnT0"
+    #insert your own google gen lang api
+    API_KEY = ""
     API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent"
 
     # Create a detailed prompt for the image generation
