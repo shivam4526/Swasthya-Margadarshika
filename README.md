@@ -20,26 +20,26 @@ Medicine Recommendations: Over-the-counter or prescription medicine suggestions.
 Voice-Based Output: The assistant responds with voice, improving accessibility for visually impaired and elderly users.
 
 ⚙️ Technologies Used
-Frontend: [List your frontend technologies, e.g., React, Vue.js, Angular]
+Frontend: [ React, Vue.js, Angular]
 
-Backend: [List your backend technologies, e.g., Python (Django/Flask), Node.js]
+Backend: [ Python (Django/Flask), Node.js]
 
-AI/ML: [List your AI libraries, e.g., scikit-learn, TensorFlow, SpaCy]
+AI/ML: [ scikit-learn, TensorFlow, SpaCy]
 
-Database: [List your database, e.g., MongoDB, PostgreSQL]
+Database: [ MongoDB, PostgreSQL]
 
-Voice/NLP: [List any NLP or voice-to-text APIs, e.g., Google Cloud Speech-to-Text API, text-to-speech libraries]
+Voice/NLP: [ voice-to-text APIs,  Google Cloud Speech-to-Text API, text-to-speech libraries]
 
 🚀 Getting Started
 Follow these steps to get a local copy of the project up and running on your machine.
 
 Prerequisites
 
-[Dependency 1, e.g., Node.js]
+[ Node.js]
 
-[Dependency 2, e.g., Python]
+[ Python]
 
-[Any other prerequisites]
+
 
 Installation
 
